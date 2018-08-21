@@ -18,7 +18,7 @@ pub enum MoveResult {
 
 pub enum MoveError {
     OutOfBounds,
-    MoveTaken,
+    TileTaken,
 }
 
 pub struct Player {
@@ -34,11 +34,13 @@ pub struct GameBoard<> {
 }
 
 impl GameBoard {
-    pub fn new(player1: Player, player2: Player) -> GameBoard {
+    pub fn new(player1: String, player2: String) -> GameBoard {
         let mut tiles = Vec::with_capacity(NUM_TILES);
         for _ in 0..NUM_TILES {
             tiles.push(Tile::Empty);
         }
+        let player1 = Player {name: player1, tile: Tile::X};
+        let player2 = Player {name: player2, tile: Tile::O};
         GameBoard {tiles, player1, player2, current_player: true}
     }
 
@@ -48,7 +50,7 @@ impl GameBoard {
         }
 
         if self.tiles[moves] != Tile::Empty {
-            return Err(MoveError::MoveTaken);
+            return Err(MoveError::TileTaken);
         }
 
         self.tiles[moves] = self.current_player().tile;

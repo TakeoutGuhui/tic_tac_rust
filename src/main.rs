@@ -1,13 +1,12 @@
 extern crate itertools;
 
 mod tictactoe;
-use tictactoe::{Player, GameBoard, Tile, MoveResult, MoveError};
+use tictactoe::{GameBoard, MoveResult, MoveError};
+
 fn main() {
     use std::io::{stdin,stdout,Write};
 
-    let player1 = Player {name: String::from("Hampus"), tile: Tile::X};
-    let player2 = Player {name: String::from("Erik"), tile: Tile::O};
-    let mut gameboard = GameBoard::new(player1, player2);
+    let mut gameboard = GameBoard::new(String::from("Hampus"), String::from("Kalle"));
     let mut input = String::new();
     loop {
         input.clear();
@@ -27,7 +26,7 @@ fn main() {
             Ok(MoveResult::Tie) => { println!("Game tied"); break; },
             Ok(MoveResult::Continue) => (),
 
-            Err(MoveError::MoveTaken) => println!("Tile already taken!"),
+            Err(MoveError::TileTaken) => println!("Tile already taken!"),
             Err(MoveError::OutOfBounds) => println!("Out of bounds!") 
         }
     }
