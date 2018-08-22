@@ -10,6 +10,16 @@ pub enum Tile {
     Empty,
 }
 
+impl fmt::Display for Tile {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match *self {
+            Tile::X => write!(f, "X"),
+            Tile::O => write!(f, "0"),
+            Tile::Empty => write!(f, ""),
+        }
+    }
+}
+
 pub enum MoveResult {
     Win(String),
     Tie,
@@ -82,7 +92,7 @@ impl GameBoard {
     fn check_victory(&self, player: &Player) -> bool {
         let magic_cube = vec![8, 3, 4, 1, 5, 9, 6, 7, 2];
         let wins = self.tiles.iter().zip(magic_cube.into_iter()) 
-            .filter(|(tile, _)| **tile == player.tile) 
+            .filter(|(&tile, _)| tile == player.tile) 
             .map(|(_, num)| num) 
             .combinations(3) 
             .any(|combination| combination.iter().sum::<u32>() == 15); 
@@ -95,7 +105,7 @@ impl fmt::Display for GameBoard {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let mut dis = String::new();
         for (number, tile) in self.tiles.iter().enumerate() {
-            let mut num_string = number.to_string();
+            let mut num_string = (number + 1).to_string();
             num_string.push_str(" ");
             let disp_tile = match tile {
                 Tile::X => "X ",
