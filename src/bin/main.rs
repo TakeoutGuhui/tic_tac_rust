@@ -1,7 +1,6 @@
-extern crate itertools;
+extern crate tic_tac_rust;
 
-mod tictactoe;
-use tictactoe::{GameBoard, MoveResult, MoveError};
+use tic_tac_rust::{GameBoard, MoveResult, MoveError};
 
 fn main() {
     use std::io::{stdin,stdout,Write};
@@ -29,6 +28,18 @@ fn main() {
             Err(MoveError::TileTaken) => println!("Tile already taken!"),
             Err(MoveError::OutOfBounds) => println!("Out of bounds!") 
         }
+    }
+
+    fn print_turn(gameboard: &GameBoard) {
+        let current_player = gameboard.current_player();
+        println!("{}", gameboard);
+        println!("Current player is: {} ({})", current_player.name, current_player.tile);
+
+    }
+
+    fn get_input() -> usize {
+        use std::io::{Stdin, stdout, Write};
+        2
     }
     
 }
