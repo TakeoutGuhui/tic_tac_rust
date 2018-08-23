@@ -3,7 +3,7 @@ extern crate itertools;
 use itertools::Itertools;
 use std::fmt;
 
-const NUM_TILES: usize = 9;
+pub const NUM_TILES: usize = 9;
 
 #[derive(Copy, Clone, PartialEq, Debug)]
 pub enum Tile {
@@ -115,7 +115,7 @@ impl fmt::Display for GameBoard {
                 Tile::Empty => &num_string,
             };
             dis.push_str(disp_tile);
-            if (number + 1)  % 3 == 0 { 
+            if (number + 1)  % 3 == 0 && (number + 1) != 9 { 
                 dis.push_str("\n")
             }
         }
