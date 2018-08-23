@@ -28,7 +28,7 @@ pub enum MoveResult {
     Continue,
 }
 
-pub enum MoveError {
+pub enum MoveErrorKind {
     OutOfBounds,
     TileTaken,
 }
@@ -56,13 +56,13 @@ impl GameBoard {
         GameBoard {tiles, player1, player2, current_player: true}
     }
 
-    pub fn player_move(&mut self, moves: usize) -> Result<MoveResult, MoveError> {
+    pub fn player_move(&mut self, moves: usize) -> Result<MoveResult, MoveErrorKind> {
         if moves >= NUM_TILES {
-            return Err(MoveError::OutOfBounds);
+            return Err(MoveErrorKind::OutOfBounds);
         }
 
         if self.tiles[moves] != Tile::Empty {
-            return Err(MoveError::TileTaken);
+            return Err(MoveErrorKind::TileTaken);
         }
 
         self.tiles[moves] = self.current_player().tile;
