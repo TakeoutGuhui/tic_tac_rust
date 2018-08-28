@@ -17,7 +17,7 @@ impl fmt::Display for Tile {
         match *self {
             Tile::X => write!(f, "X"),
             Tile::O => write!(f, "0"),
-            Tile::Empty => write!(f, ""),
+            Tile::Empty => write!(f, " "),
         }
     }
 }
@@ -39,7 +39,7 @@ pub struct Player {
 }
 
 pub struct GameBoard<> {
-    tiles: Vec<Tile>,
+    pub tiles: Vec<Tile>,
     player1: Player,
     player2: Player, 
     current_player: bool,
@@ -88,7 +88,7 @@ impl GameBoard {
     }
 
     fn check_tie(&self) -> bool {
-        self.tiles.iter().filter(|tile| **tile != Tile::Empty).count() == 9
+        self.tiles.iter().filter(|&tile| *tile != Tile::Empty).count() == 9
     }
 
     fn check_victory(&self, player: &Player) -> bool {
@@ -99,26 +99,5 @@ impl GameBoard {
             .combinations(3) 
             .any(|combination| combination.iter().sum::<u32>() == 15); 
         wins
-    }
-}
-
-//TODO: Make a better solution
-impl fmt::Display for GameBoard {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        let mut dis = String::new();
-        for (number, tile) in self.tiles.iter().enumerate() {
-            let mut num_string = (number + 1).to_string();
-            num_string.push_str(" ");
-            let disp_tile = match tile {
-                Tile::X => "X ",
-                Tile::O => "O ",
-                Tile::Empty => &num_string,
-            };
-            dis.push_str(disp_tile);
-            if (number + 1)  % 3 == 0 && (number + 1) != 9 { 
-                dis.push_str("\n")
-            }
-        }
-        write!(f, "{}", dis)
     }
 }
