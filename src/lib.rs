@@ -88,12 +88,12 @@ impl GameBoard {
     }
 
     fn check_tie(&self) -> bool {
-        self.tiles.iter().filter(|&tile| *tile != Tile::Empty).count() == 9
+        self.tiles.iter().filter(|&tile| *tile != Tile::Empty).count() == NUM_TILES
     }
 
     fn check_victory(&self, player: &Player) -> bool {
-        let magic_cube = vec![8, 3, 4, 1, 5, 9, 6, 7, 2];
-        let wins = self.tiles.iter().zip(magic_cube.into_iter()) 
+        let magic_square = vec![8, 3, 4, 1, 5, 9, 6, 7, 2];
+        let wins = self.tiles.iter().zip(magic_square.into_iter()) 
             .filter(|(&tile, _)| tile == player.tile) 
             .map(|(_, num)| num) 
             .combinations(3) 
