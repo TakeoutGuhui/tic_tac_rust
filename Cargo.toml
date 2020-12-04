@@ -5,3 +5,4 @@ authors = ["TakeoutGuhui <takeoutguhui@gmail.com>"]
 
 [dependencies]
 itertools = "0.7.8"
+lazy_static = "1.4.0"
