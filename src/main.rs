@@ -1,6 +1,6 @@
 extern crate tic_tac_rust;
 
-use tic_tac_rust::{GameBoard, MoveResult, MoveErrorKind, NUM_TILES};
+use tic_tac_rust::{GameBoard, MoveResult, MoveError, NUM_TILES};
 
 fn main() {
     let mut gameboard = GameBoard::new(String::from("Hampus"), String::from("Kalle"));
@@ -16,8 +16,8 @@ fn main() {
             Ok(MoveResult::Tie) => { println!("Game tied"); break; },
             Ok(MoveResult::Continue) => (),
 
-            Err(MoveErrorKind::TileTaken) => println!("Tile already taken!"),
-            Err(MoveErrorKind::OutOfBounds) => println!("Out of bounds!") 
+            Err(MoveError::TileTaken) => println!("Tile already taken!"),
+            Err(MoveError::OutOfBounds) => println!("Out of bounds!") 
         }
         println!();
     }

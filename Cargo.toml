@@ -1,8 +1,9 @@
 [package]
 name = "tic_tac_rust"
 version = "0.1.0"
-authors = ["Hampus Gunnarsson <takeoutguhui@gmail.com>"]
+authors = ["TakeoutGuhui <takeoutguhui@gmail.com>"]
 edition = "2018"
 
 [dependencies]
 itertools = "0.7.8"
+lazy_static = "1.4.0"
