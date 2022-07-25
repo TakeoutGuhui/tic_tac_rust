@@ -12,10 +12,11 @@ pub enum Tile {
 
 impl fmt::Display for Tile {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        use Tile::*;
         match *self {
-            Tile::X => write!(f, "X"),
-            Tile::O => write!(f, "0"),
-            Tile::Empty => write!(f, " "),
+            X => write!(f, "X"),
+            O => write!(f, "0"),
+            Empty => write!(f, " "),
         }
     }
 }
