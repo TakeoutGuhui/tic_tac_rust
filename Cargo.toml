@@ -2,6 +2,7 @@
 name = "tic_tac_rust"
 version = "0.1.0"
 authors = ["Hampus Gunnarsson <takeoutguhui@gmail.com>"]
+edition = "2018"
 
 [dependencies]
 itertools = "0.7.8"
